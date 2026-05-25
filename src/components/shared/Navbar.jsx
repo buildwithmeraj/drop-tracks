@@ -3,7 +3,9 @@ import Logo from "../utilities/Logo";
 import { auth } from "@/auth";
 import AuthActions from "@/components/auth/AuthActions";
 import ThemeSwithcer from "../utilities/ThemeSwithcer";
+import { HiBars3 } from "react-icons/hi2";
 import { TbHome, TbLayoutDashboard, TbParachute } from "react-icons/tb";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const navItems = [
   { href: "/", label: "Home", icon: <TbHome size={16} /> },
@@ -23,65 +25,81 @@ const Navbar = async () => {
   const session = await auth();
 
   return (
-    <nav className="navbar fixed top-0 z-30 border-b border-base-300 bg-base-100/30 text-base-content px-4 backdrop-blur md:px-6">
-      <div className="navbar-start gap-2">
-        <div className="dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost rounded-full lg:hidden"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+    <div className="drawer lg:drawer-open">
+      <input id="mobile-nav-drawer" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        <nav className="navbar fixed top-0 z-30 border-b border-base-300 bg-base-100/30 text-base-content px-4 backdrop-blur md:px-6">
+          <div className="navbar-start gap-2">
+            <label
+              htmlFor="mobile-nav-drawer"
+              className="btn btn-sm lg:hidden"
+              aria-label="Open navigation menu"
             >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+              <HiBars3 className="text-2xl" />
+            </label>
+            <Link href="/">
+              <Logo />
+            </Link>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 border border-base-300 bg-base-100 p-2 shadow"
-          >
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="hover:bg-primary transition-colors hover:text-primary-content"
+                  >
+                    {item.icon}
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="navbar-end flex items-center gap-3">
+            <div className="hidden md:flex">
+              <AuthActions user={session?.user} />
+            </div>
+            <ThemeSwithcer />
+          </div>
+        </nav>
+      </div>
+      <div className="drawer-side z-40 lg:hidden">
+        <label
+          htmlFor="mobile-nav-drawer"
+          aria-label="Close navigation menu"
+          className="drawer-overlay"
+        />
+        <aside className="min-h-full w-80 max-w-[85vw] border-r border-base-300 bg-base-100 p-4 text-base-content">
+          <div className="mb-6 flex items-center justify-between gap-3">
+            <Link href="/" className="max-w-full">
+              <Logo />
+            </Link>
+            <label
+              htmlFor="mobile-nav-drawer"
+              className="btn btn-ghost btn-sm rounded-full"
+            >
+              <IoMdCloseCircleOutline size={22} className="opacity-50" />
+            </label>
+          </div>
+
+          <ul className="menu w-full gap-1 rounded-box bg-base-300/90 p-2">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link href={item.href}>{item.label}</Link>
+                <Link href={item.href}>
+                  {item.icon}
+                  {item.label}
+                </Link>
               </li>
             ))}
           </ul>
-        </div>
-        <Link href="/">
-          <Logo />
-        </Link>
+
+          <div className="mt-6">
+            <AuthActions user={session?.user} mobile />
+          </div>
+        </aside>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="hover:bg-primary transition-colors hover:text-primary-content"
-              >
-                {item.icon}
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="navbar-end flex items-center gap-3">
-        <AuthActions user={session?.user} />
-        <ThemeSwithcer />
-      </div>
-    </nav>
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import { siteConfig } from "@/lib/site";
-import React from "react";
 import {
   FaBolt,
   FaClipboardCheck,
@@ -62,7 +61,8 @@ const HowItWorks = () => {
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <span className="badge badge-lg badge-info font-bold">
-                      STEP {step.number}
+                      <span className="hidden md:flex">STEP </span>
+                      {step.number}
                     </span>
                     <h3 className="text-xl font-bold">{step.title}</h3>
                   </div>

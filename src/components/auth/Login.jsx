@@ -1,23 +1,27 @@
-import React from "react";
 import { siteConfig } from "@/lib/site";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "@/auth";
+import Alert from "@/components/alerts/Alert";
 
-const Login = () => {
+const Login = ({ message, callbackUrl = "/dashboard" }) => {
   return (
     <div className="flex flex-col min-h-[78vh] justify-center items-center">
       <div className="card max-w-sm bg-base-200/40 shadow-md backdrop-blur-xs px-4">
         <div className="card-body">
           <h2 className="font-bold text-2xl text-center my-2">Login</h2>
-          <p className="text-center my-2">
-            To access the features of the {siteConfig.name}, please login with
-            your google account.
-          </p>
+          {message ? (
+            <Alert message={message} />
+          ) : (
+            <p className="text-center my-2">
+              To access the features of the {siteConfig.name}, please login with
+              your google account.
+            </p>
+          )}
           <form
             className="mt-4 flex justify-center items-center"
             action={async () => {
               "use server";
-              await signIn("google", { redirectTo: "/dashboard" });
+              await signIn("google", { redirectTo: callbackUrl });
             }}
           >
             <button

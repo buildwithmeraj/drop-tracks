@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { updateAirdropAction } from "@/app/actions/airdrops";
 import AirdropForm from "@/components/airdrops/AirdropForm";
 import { getAirdropByIdForUser } from "@/lib/airdrops";
+import { buildLoginRedirect } from "@/lib/auth-redirect";
 
 export const metadata = {
   title: "Update Airdrop",
@@ -10,13 +11,13 @@ export const metadata = {
 };
 
 export default async function UpdateAirdropPage({ params }) {
+  const { id } = await params;
   const session = await auth();
 
   if (!session?.user) {
-    redirect("/");
+    redirect(buildLoginRedirect(`/dashboard/airdrops/update/${id}`));
   }
 
-  const { id } = await params;
   const airdrop = await getAirdropByIdForUser(session.user.id, id);
 
   if (!airdrop) {

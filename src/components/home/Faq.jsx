@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/site";
-import React from "react";
+import { GrInfo } from "react-icons/gr";
 
 const faqs = [
   {
@@ -55,6 +55,7 @@ const Faq = () => {
             </div>
             <div className="collapse-content">
               <p className="text-sm leading-6 text-base-content/70">
+                <GrInfo className="inline mr-1.5 mb-0.5 text-info" size={16} />
                 {faq.answer}
               </p>
             </div>

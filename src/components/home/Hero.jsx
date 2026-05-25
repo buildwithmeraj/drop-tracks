@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { auth, signIn } from "@/auth";
+import { auth } from "@/auth";
 import { siteConfig } from "@/lib/site";
 import Image from "next/image";
 import { RiLoginBoxLine } from "react-icons/ri";

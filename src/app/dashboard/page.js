@@ -9,6 +9,7 @@ import {
   FaRocket,
 } from "react-icons/fa6";
 import { auth } from "@/auth";
+import { buildLoginRedirect } from "@/lib/auth-redirect";
 import { getDashboardAirdropOverview } from "@/lib/airdrops";
 import { formatDate, formatRelativeWindow } from "@/lib/formatters";
 
@@ -21,7 +22,7 @@ export default async function DashboardPage() {
   const session = await auth();
 
   if (!session?.user) {
-    redirect("/");
+    redirect(buildLoginRedirect("/dashboard"));
   }
 
   const overview = await getDashboardAirdropOverview(session.user.id);

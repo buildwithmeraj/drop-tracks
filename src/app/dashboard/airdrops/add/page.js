@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { createAirdropAction } from "@/app/actions/airdrops";
 import AirdropForm from "@/components/airdrops/AirdropForm";
+import { buildLoginRedirect } from "@/lib/auth-redirect";
 
 export const metadata = {
   title: "Add Airdrop",
@@ -12,7 +13,7 @@ export default async function AddAirdropPage() {
   const session = await auth();
 
   if (!session?.user) {
-    redirect("/");
+    redirect(buildLoginRedirect("/dashboard/airdrops/add"));
   }
 
   return (

@@ -7,6 +7,7 @@ import {
   FaPlus,
 } from "react-icons/fa6";
 import { auth } from "@/auth";
+import { buildLoginRedirect } from "@/lib/auth-redirect";
 import DeleteAirdropButton from "@/components/airdrops/DeleteAirdropButton";
 import Pagination from "@/components/airdrops/Pagination";
 import { formatDate } from "@/lib/formatters";
@@ -28,7 +29,7 @@ export default async function AirdropsPage({ searchParams }) {
   const session = await auth();
 
   if (!session?.user) {
-    redirect("/");
+    redirect(buildLoginRedirect("/dashboard/airdrops"));
   }
 
   const params = await searchParams;

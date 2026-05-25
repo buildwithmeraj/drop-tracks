@@ -4,12 +4,22 @@ import { MdOutlineExitToApp } from "react-icons/md";
 import { signOut } from "@/auth";
 import { RiLoginBoxLine } from "react-icons/ri";
 
-const AuthActions = ({ user }) => {
+function shortenEmail(email, maxLength = 10) {
+  if (typeof email !== "string") {
+    return "";
+  }
+
+  return email.length > maxLength ? `${email.slice(0, maxLength)}...` : email;
+}
+
+const AuthActions = ({ user, mobile = false }) => {
   if (!user) {
     return (
       <Link
         href="/login"
-        className="btn btn-primary flex items-center rounded-full"
+        className={`btn btn-primary flex items-center ${
+          mobile ? "w-full justify-center rounded-2xl" : "rounded-full"
+        }`}
       >
         <RiLoginBoxLine className="text-lg mt-0.5" />
         Login
@@ -18,8 +28,14 @@ const AuthActions = ({ user }) => {
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <div className="hidden items-center gap-2 rounded-full bg-base-300 px-2 py-1 md:flex">
+    <div
+      className={`flex ${mobile ? "flex-col items-stretch" : "items-center"} gap-3`}
+    >
+      <div
+        className={`items-center gap-2 bg-base-300 px-2 py-1 ${
+          mobile ? "flex rounded-2xl" : "hidden rounded-full xl:flex"
+        }`}
+      >
         {user.image ? (
           <Image
             src={user.image}
@@ -35,7 +51,9 @@ const AuthActions = ({ user }) => {
         )}
         <div className="leading-tight">
           <p className="text-sm font-semibold">{user.name ?? "Airdrop User"}</p>
-          <p className="text-xs text-base-content/60">{user.email}</p>
+          <p className="text-xs text-base-content/60">
+            {shortenEmail(user.email, 4)}@gmail.com
+          </p>
         </div>
       </div>
       <form
@@ -44,7 +62,10 @@ const AuthActions = ({ user }) => {
           await signOut({ redirectTo: "/login" });
         }}
       >
-        <button type="submit" className="btn btn-error rounded-full">
+        <button
+          type="submit"
+          className={`btn btn-error ${mobile ? "w-full rounded-2xl" : "rounded-full"}`}
+        >
           <MdOutlineExitToApp size={19} className="mt-0.5" />
           Sign out
         </button>

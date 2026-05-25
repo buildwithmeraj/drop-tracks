@@ -1,5 +1,4 @@
 import { siteConfig } from "@/lib/site";
-import React from "react";
 import { FaCheck, FaXmark } from "react-icons/fa6";
 
 const comparisons = [
@@ -34,11 +33,6 @@ const WhyBetter = () => {
           <span className="text-primary font-extrabold">{siteConfig.name}</span>{" "}
           beats spreadsheets
         </h2>
-        <p className="max-w-2xl text-base-content/70">
-          Spreadsheets can store data, but they do not understand the workflow
-          of real airdrop farming. {siteConfig.name} is built around the way you
-          actually track campaigns.
-        </p>
       </div>
 
       <div className="overflow-hidden rounded-3xl border border-base-200 bg-base-200/30 shadow-sm backdrop-blur-sm">

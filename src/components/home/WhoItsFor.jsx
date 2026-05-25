@@ -1,5 +1,4 @@
 import { siteConfig } from "@/lib/site";
-import React from "react";
 import {
   FaBolt,
   FaLayerGroup,
