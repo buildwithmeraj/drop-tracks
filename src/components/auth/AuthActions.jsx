@@ -1,27 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
 import { MdOutlineExitToApp } from "react-icons/md";
-import { signIn, signOut } from "@/auth";
-import { TbLayoutDashboardFilled } from "react-icons/tb";
+import { signOut } from "@/auth";
+import { RiLoginBoxLine } from "react-icons/ri";
 
 const AuthActions = ({ user }) => {
   if (!user) {
     return (
-      <form
-        action={async () => {
-          "use server";
-          await signIn("google", { redirectTo: "/dashboard" });
-        }}
+      <Link
+        href="/login"
+        className="btn btn-primary flex items-center rounded-full"
       >
-        <button
-          type="submit"
-          className="btn bg-gray-100 rounded-full flex items-center text-black"
-        >
-          <FcGoogle className="text-lg mt-0.5" />
-          Sign in
-        </button>
-      </form>
+        <RiLoginBoxLine className="text-lg mt-0.5" />
+        Login
+      </Link>
     );
   }
 
@@ -49,7 +41,7 @@ const AuthActions = ({ user }) => {
       <form
         action={async () => {
           "use server";
-          await signOut({ redirectTo: "/" });
+          await signOut({ redirectTo: "/login" });
         }}
       >
         <button type="submit" className="btn btn-error rounded-full">

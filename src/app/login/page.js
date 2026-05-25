@@ -1,8 +1,8 @@
-import Hero from "@/components/home/Hero";
+import Login from "@/components/auth/Login";
 import React from "react";
 
 const page = () => {
-  return <Hero />;
+  return <Login />;
 };
 
 export default page;

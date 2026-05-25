@@ -1,18 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import AppProviders from "@/components/providers/AppProviders";
 import { siteConfig } from "@/lib/site";
 import Footer from "@/components/shared/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const montserratFont = Montserrat({
+  variable: "--font-montserrat",
+  display: "swap",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["500"],
 });
 
 export const metadata = {
@@ -59,20 +56,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-screen">
+    <html lang="en" className="h-full" suppressHydrationWarning>
+      <body
+        className={`${montserratFont.className} flex flex-col min-h-screen antialiased`}
+      >
         <AppProviders>
-          <div className="flex min-h-screen flex-col">
-            <header>
-              <Navbar />
-            </header>
-            <main className="grow mt-16">{children}</main>
-            <Footer />
-          </div>
+          <header>
+            <Navbar />
+          </header>
+          <main className="grow mt-24 container max-w-7xl mx-auto">
+            {children}
+          </main>
+          <Footer />
         </AppProviders>
       </body>
     </html>
