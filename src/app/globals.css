@@ -78,3 +78,7 @@ body {
   --depth: 1;
   --noise: 1;
 }
+
+.section-title {
+  @apply text-3xl font-bold;
+}

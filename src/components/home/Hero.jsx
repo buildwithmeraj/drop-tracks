@@ -4,14 +4,15 @@ import { siteConfig } from "@/lib/site";
 import Image from "next/image";
 import { RiLoginBoxLine } from "react-icons/ri";
 import { TbLayoutDashboard } from "react-icons/tb";
+import { MdMyLocation } from "react-icons/md";
 
 export default async function Home() {
   const session = await auth();
 
   return (
     <section className="relative">
-      <div className="bg-base-200/30 card shadow-md hover:shadow-lg hover:transition-all duration-300 backdrop-blur-sm p-6">
-        <div className="card-body space-y-3 -mb-4 relative lg:pr-60">
+      <div className="bg-base-200/30 border border-base-200 card shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm p-6">
+        <div className="card-body space-y-5 -mb-4 relative lg:pr-60">
           <h2 className="text-5xl font-bold">
             Welcome to{" "}
             <span className="text-primary font-extrabold">
@@ -19,6 +20,7 @@ export default async function Home() {
             </span>
           </h2>
           <h1 className="text-3xl font-black tracking-tight">
+            <MdMyLocation className="inline mb-0.5 mr-2 text-primary" />
             Track every crypto airdrop before it slips through the cracks.
           </h1>
           <p className="max-w-2xl text-lg text-base-content/70">

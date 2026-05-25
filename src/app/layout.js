@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
           <header>
             <Navbar />
           </header>
-          <main className="grow mt-24 container max-w-7xl mx-auto">
+          <main className="grow mt-24 mb-8 container max-w-7xl mx-auto">
             {children}
           </main>
           <Footer />
