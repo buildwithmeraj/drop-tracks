@@ -1,65 +1,83 @@
-import Image from "next/image";
+import Link from "next/link";
+import { auth, signIn } from "@/auth";
+import { FaArrowTrendUp } from "react-icons/fa6";
+import { HiMiniSparkles } from "react-icons/hi2";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
+    <section className="relative overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-primary/15 to-transparent" />
+      <div className="mx-auto flex min-h-[calc(100vh-12rem)] w-full max-w-6xl flex-col justify-center gap-12 px-4 py-16 md:px-6">
+        <div className="max-w-3xl space-y-6">
+          <div className="badge badge-primary badge-outline gap-2 px-4 py-4">
+            <HiMiniSparkles />
+            Built for serious airdrop hunters
+          </div>
+          <h1 className="text-5xl font-black tracking-tight md:text-7xl">
+            Track every crypto airdrop before it slips through the cracks.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="max-w-2xl text-lg text-base-content/70">
+            Keep one clean dashboard for campaigns, task progress, deadlines,
+            wallets, and notes so you always know what to do next.
           </p>
+          <div className="flex flex-wrap items-center gap-4">
+            {session?.user ? (
+              <Link href="/dashboard" className="btn btn-primary rounded-full">
+                Go to dashboard
+              </Link>
+            ) : (
+              <form
+                action={async () => {
+                  "use server";
+                  await signIn("google", { redirectTo: "/dashboard" });
+                }}
+              >
+                <button type="submit" className="btn btn-primary rounded-full">
+                  Start with Google
+                </button>
+              </form>
+            )}
+            <span className="text-sm text-base-content/60">
+              DropTracks is ready for Mongo-backed airdrop tracking.
+            </span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="card border border-base-300 bg-base-100 shadow-sm">
+            <div className="card-body">
+              <FaArrowTrendUp className="text-2xl text-primary" />
+              <h2 className="card-title">Track campaign status</h2>
+              <p className="text-sm text-base-content/70">
+                Store which airdrops you joined, where you are in the process,
+                and what is still pending.
+              </p>
+            </div>
+          </div>
+          <div className="card border border-base-300 bg-base-100 shadow-sm">
+            <div className="card-body">
+              <FaArrowTrendUp className="text-2xl text-primary" />
+              <h2 className="card-title">Keep wallet notes organized</h2>
+              <p className="text-sm text-base-content/70">
+                Separate wallets, links, task history, and reminders without
+                juggling spreadsheets.
+              </p>
+            </div>
+          </div>
+          <div className="card border border-base-300 bg-base-100 shadow-sm">
+            <div className="card-body">
+              <FaArrowTrendUp className="text-2xl text-primary" />
+              <h2 className="card-title">Build toward a real dashboard</h2>
+              <p className="text-sm text-base-content/70">
+                This first step handles Google sign-in so we can move next into
+                saving airdrop records per user.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
   );
 }
