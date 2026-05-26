@@ -1,7 +1,13 @@
 import { auth } from "@/auth";
 import Login from "@/components/auth/Login";
 import { getAuthMessage } from "@/lib/auth-redirect";
+import { siteConfig } from "@/lib/site";
 import { redirect } from "next/navigation";
+
+export const metadata = {
+  title: "Login",
+  description: `Login to ${siteConfig.name} to access all the features`,
+};
 
 const page = async ({ searchParams }) => {
   const params = await searchParams;

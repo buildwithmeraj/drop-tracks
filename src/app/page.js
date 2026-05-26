@@ -4,6 +4,10 @@ import Hero from "@/components/home/Hero";
 import HowItWorks from "@/components/home/HowItWorks";
 import WhoItsFor from "@/components/home/WhoItsFor";
 import WhyBetter from "@/components/home/WhyBetter";
+import { siteConfig } from "@/lib/site";
+export const metadata = {
+  title: `Hunt Airdrop Smartly | ${siteConfig.name}`,
+};
 
 const page = () => {
   return (

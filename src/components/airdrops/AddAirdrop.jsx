@@ -209,7 +209,15 @@ const AddAirdrop = ({ mode, initialData, action }) => {
     <form action={submitAction} className="space-y-6">
       <div className="space-y-2 flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight">
-          {mode === "create" ? "Add New Airdrop" : "Update Airdrop"}
+          {mode === "create" ? (
+            <>
+              Add New <span className="text-primary">Airdrop</span>
+            </>
+          ) : (
+            <>
+              Update <span className="text-primary">Airdrop</span>
+            </>
+          )}
         </h2>
         <Link href="/dashboard/airdrops" class="btn btn-primary">
           <TbParachute />

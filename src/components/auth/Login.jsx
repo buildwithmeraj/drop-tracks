@@ -5,10 +5,12 @@ import Alert from "@/components/alerts/Alert";
 
 const Login = ({ message, callbackUrl = "/dashboard" }) => {
   return (
-    <div className="flex flex-col min-h-[78vh] justify-center items-center">
+    <div className="flex flex-col min-h-[77vh] justify-center items-center">
       <div className="card max-w-sm bg-base-200/40 shadow-md backdrop-blur-xs px-4">
         <div className="card-body">
-          <h2 className="font-bold text-2xl text-center my-2">Login</h2>
+          <h2 className="font-bold text-2xl text-center my-2">
+            Account <span className="text-primary">Login</span>
+          </h2>
           {message ? (
             <Alert message={message} />
           ) : (

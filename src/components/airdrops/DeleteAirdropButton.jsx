@@ -34,7 +34,7 @@ const DeleteAirdropButton = ({ id, name }) => {
     <>
       <button
         type="button"
-        className="btn btn-ghost btn-sm text-error"
+        className="btn btn-error btn-soft btn-sm"
         onClick={() => dialogRef.current?.showModal()}
       >
         <FaRegTrashCan />

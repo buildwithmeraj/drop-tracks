@@ -33,7 +33,6 @@ const Navbar = async () => {
             <label
               htmlFor="mobile-nav-drawer"
               className="btn btn-sm lg:hidden"
-              s
               aria-label="Open navigation menu"
             >
               <HiBars3 className="text-2xl" />

@@ -1,22 +1,13 @@
-import { auth } from "@/auth";
-import Menu from "@/components/dashboard/Menu";
-import Stats from "@/components/dashboard/Stats";
-import Welcome from "@/components/dashboard/Welcome";
+import Main from "@/components/dashboard/Main";
 import React from "react";
+export const metadata = {
+  title: "Dashboard",
+  description:
+    "Monitor tracked airdrops, upcoming payments, TGEs, and daily reminders.",
+};
 
-const page = async () => {
-  const session = await auth();
-
-  if (!session?.user) {
-    redirect(buildLoginRedirect("/dashboard"));
-  }
-  return (
-    <div className="space-y-6">
-      <Welcome />
-      <Stats />
-      <Menu />
-    </div>
-  );
+const page = () => {
+  return <Main />;
 };
 
 export default page;
