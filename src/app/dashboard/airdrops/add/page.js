@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { createAirdropAction } from "@/app/actions/airdrops";
-import AirdropForm from "@/components/airdrops/AirdropForm";
+import AddAirdrop from "@/components/airdrops/AddAirdrop";
 import { buildLoginRedirect } from "@/lib/auth-redirect";
 
 export const metadata = {
@@ -20,7 +20,7 @@ export default async function AddAirdropPage() {
   return (
     <section className="flex flex-col gap-6">
       <div className="card border border-base-200 bg-base-100/30 backdrop-blur-sm p-6 shadow-sm">
-        <AirdropForm mode="create" action={createAirdropAction} />
+        <AddAirdrop mode="create" action={createAirdropAction} />
       </div>
     </section>
   );

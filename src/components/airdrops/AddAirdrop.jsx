@@ -19,6 +19,9 @@ import { isSupportedTelegramMessageLink } from "@/lib/telegram";
 import { MdCancel, MdLabel } from "react-icons/md";
 import InfoMsg from "../alerts/Info";
 import { PiListChecksFill } from "react-icons/pi";
+import { TbParachute } from "react-icons/tb";
+
+import Link from "next/link";
 
 const createAccount = (id) => ({
   id,
@@ -35,7 +38,7 @@ function formatDateInput(value) {
   return new Date(value).toISOString().slice(0, 10);
 }
 
-const AirdropForm = ({ mode, initialData, action }) => {
+const AddAirdrop = ({ mode, initialData, action }) => {
   const router = useRouter();
   const [name, setName] = useState(initialData?.name ?? "");
   const [link, setLink] = useState(initialData?.link ?? "");
@@ -204,10 +207,14 @@ const AirdropForm = ({ mode, initialData, action }) => {
 
   return (
     <form action={submitAction} className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">
+      <div className="space-y-2 flex items-center justify-between">
+        <h2 className="text-3xl font-bold tracking-tight">
           {mode === "create" ? "Add New Airdrop" : "Update Airdrop"}
-        </h1>
+        </h2>
+        <Link href="/dashboard/airdrops" class="btn btn-primary">
+          <TbParachute />
+          All Airdrops
+        </Link>
       </div>
 
       <div className="space-y-4">
@@ -517,4 +524,4 @@ const AirdropForm = ({ mode, initialData, action }) => {
   );
 };
 
-export default AirdropForm;
+export default AddAirdrop;
