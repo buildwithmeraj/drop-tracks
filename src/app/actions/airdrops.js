@@ -101,7 +101,9 @@ export async function analyzeTelegramAirdropAction(link) {
       name: extracted.name || deriveNameFromTelegramPost(telegramPost.postText),
     };
 
-    const filledCount = Object.values(data).filter(Boolean).length;
+    const filledCount = Object.values(data).filter(
+      (value) => value !== null && value !== undefined && value !== "",
+    ).length;
 
     return {
       ok: true,

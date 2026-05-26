@@ -28,11 +28,12 @@ const Navbar = async () => {
     <div className="drawer lg:drawer-open">
       <input id="mobile-nav-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <nav className="navbar fixed top-0 z-30 border-b border-base-300 bg-base-100/30 text-base-content px-4 backdrop-blur md:px-6">
-          <div className="navbar-start gap-2">
+        <nav className="navbar fixed top-0 z-30 border-b border-base-300 bg-base-100/30 text-base-content px-4 backdrop-blur-sm lg:px-10 xl:px-20">
+          <div className="navbar-start gap-6 md:gap-2">
             <label
               htmlFor="mobile-nav-drawer"
               className="btn btn-sm lg:hidden"
+              s
               aria-label="Open navigation menu"
             >
               <HiBars3 className="text-2xl" />

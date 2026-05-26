@@ -82,3 +82,7 @@ body {
 .section-title {
   @apply text-3xl font-bold;
 }
+
+.input-label {
+  @apply block mb-2;
+}

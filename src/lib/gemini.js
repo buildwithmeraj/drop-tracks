@@ -41,6 +41,12 @@ const EXTRACTION_SCHEMA = {
       description:
         "The expected TGE date in YYYY-MM-DD only if explicitly stated. Otherwise null.",
     },
+    needsDailyTasks: {
+      type: "BOOLEAN",
+      nullable: true,
+      description:
+        "True only if the post explicitly says the user must check in daily, do daily tasks, maintain a streak, or return every day. False only if the post explicitly says no recurring daily task is needed. Otherwise null.",
+    },
   },
   required: [
     "summary",
@@ -48,6 +54,7 @@ const EXTRACTION_SCHEMA = {
     "endDate",
     "expectedPaymentDate",
     "expectedTgeDate",
+    "needsDailyTasks",
   ],
 };
 
@@ -79,6 +86,14 @@ function normalizeTextValue(value) {
   return trimmed || null;
 }
 
+function normalizeBooleanValue(value) {
+  if (typeof value !== "boolean") {
+    return null;
+  }
+
+  return value;
+}
+
 export function normalizeGeminiExtraction(payload) {
   if (!payload || typeof payload !== "object") {
     return {
@@ -87,6 +102,7 @@ export function normalizeGeminiExtraction(payload) {
       endDate: null,
       expectedPaymentDate: null,
       expectedTgeDate: null,
+      needsDailyTasks: null,
     };
   }
 
@@ -96,6 +112,7 @@ export function normalizeGeminiExtraction(payload) {
     endDate: normalizeDateValue(payload.endDate),
     expectedPaymentDate: normalizeDateValue(payload.expectedPaymentDate),
     expectedTgeDate: normalizeDateValue(payload.expectedTgeDate),
+    needsDailyTasks: normalizeBooleanValue(payload.needsDailyTasks),
   };
 }
 
@@ -105,6 +122,7 @@ function buildPrompt({ postText, link }) {
     "Return null for any field that is missing, unclear, inferred, approximate, or not explicitly stated.",
     "Do not invent dates. Do not guess campaign names unless the post makes them obvious.",
     "The summary should be concise and useful for a user saving notes about the airdrop.",
+    "Set needsDailyTasks to true only when the post explicitly mentions daily check-ins, daily tasks, daily claims, or streak-based recurring actions.",
     `Telegram post link: ${link}`,
     "",
     "Post text:",
