@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MdOutlineExitToApp } from "react-icons/md";
 import { signOut } from "@/auth";
 import { RiLoginBoxLine } from "react-icons/ri";
+import SignOutButton from "@/components/auth/SignOutButton";
 
 function shortenEmail(email, maxLength = 10) {
   if (typeof email !== "string") {
@@ -62,13 +62,7 @@ const AuthActions = ({ user, mobile = false }) => {
           await signOut({ redirectTo: "/login" });
         }}
       >
-        <button
-          type="submit"
-          className={`btn btn-error ${mobile ? "w-full rounded-2xl" : "rounded-full"}`}
-        >
-          <MdOutlineExitToApp size={19} className="mt-0.5" />
-          Sign out
-        </button>
+        <SignOutButton mobile={mobile} />
       </form>
     </div>
   );

@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import AppProviders from "@/components/providers/AppProviders";
 import { siteConfig } from "@/lib/site";
 import Footer from "@/components/shared/Footer";
+import NavbarFallback from "@/components/shared/NavbarFallback";
 
 const montserratFont = Montserrat({
   variable: "--font-montserrat",
@@ -62,7 +64,9 @@ export default function RootLayout({ children }) {
       >
         <AppProviders>
           <header>
-            <Navbar />
+            <Suspense fallback={<NavbarFallback />}>
+              <Navbar />
+            </Suspense>
           </header>
           <main className="grow mt-24 mb-8 container max-w-7xl mx-auto px-4">
             {children}

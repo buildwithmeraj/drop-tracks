@@ -1,7 +1,7 @@
 import { siteConfig } from "@/lib/site";
-import { FcGoogle } from "react-icons/fc";
 import { signIn } from "@/auth";
 import Alert from "@/components/alerts/Alert";
+import LoginSubmitButton from "@/components/auth/LoginSubmitButton";
 
 const Login = ({ message, callbackUrl = "/dashboard" }) => {
   return (
@@ -26,13 +26,7 @@ const Login = ({ message, callbackUrl = "/dashboard" }) => {
               await signIn("google", { redirectTo: callbackUrl });
             }}
           >
-            <button
-              type="submit"
-              className="btn w-28 bg-gray-100 rounded-full text-black hover:w-full hover:mx-0 transition-all duration-300 hover:btn-soft hover:border hover:border-primary"
-            >
-              <FcGoogle className="text-lg mt-0.5" />
-              Sign in
-            </button>
+            <LoginSubmitButton />
           </form>
         </div>
       </div>
