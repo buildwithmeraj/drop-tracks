@@ -81,7 +81,7 @@ export default async function Main() {
           </h1>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap justify-end md:justify-normal gap-2">
           <Link
             href="/dashboard/airdrops"
             className="btn btn-soft btn-sm sm:btn-md"

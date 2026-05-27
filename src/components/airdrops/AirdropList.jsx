@@ -75,14 +75,11 @@ export default async function AirdropsList({ searchParams }) {
 
   return (
     <section className="space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex gap-3 flex-row items-center justify-between">
         <h1 className="text-3xl font-black tracking-tight">
           <span className="text-primary">Airdrops</span> List
         </h1>
-        <Link
-          href="/dashboard/airdrops/add"
-          className="btn btn-primary rounded-full"
-        >
+        <Link href="/dashboard/airdrops/add" className="btn btn-primary">
           <FaPlus />
           Add airdrop
         </Link>

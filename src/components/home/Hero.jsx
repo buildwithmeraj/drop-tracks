@@ -11,15 +11,15 @@ export default async function Home() {
 
   return (
     <section className="relative">
-      <div className="bg-base-200/30 border border-base-200 card shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm p-6">
+      <div className="bg-base-200/30 border border-base-200 card shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm p-3 md:p-6">
         <div className="card-body space-y-5 -mb-4 relative lg:pr-60">
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-4xl md:text-5xl font-bold">
             Welcome to{" "}
             <span className="text-primary font-extrabold">
               {siteConfig.name}
             </span>
           </h2>
-          <h1 className="text-3xl font-black tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight">
             <MdMyLocation className="inline mb-0.5 mr-2 text-primary" />
             Track every crypto airdrop before it slips through the cracks.
           </h1>
@@ -28,17 +28,14 @@ export default async function Home() {
             multiple accounts, wallets, daily tasks/check-in and notes so you
             always know what to do next.
           </p>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center md:justify-normal gap-4">
             {session?.user ? (
-              <Link href="/dashboard" className="btn btn-primary rounded-full">
+              <Link href="/dashboard" className="btn btn-primary ">
                 <TbLayoutDashboard size={16} />
                 Go to dashboard
               </Link>
             ) : (
-              <Link
-                href="/login"
-                className="btn btn-primary flex items-center rounded-full"
-              >
+              <Link href="/login" className="btn btn-primary flex items-center">
                 <RiLoginBoxLine className="text-lg mt-0.5" />
                 Login
               </Link>

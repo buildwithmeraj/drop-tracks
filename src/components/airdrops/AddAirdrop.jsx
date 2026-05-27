@@ -211,7 +211,8 @@ const AddAirdrop = ({ mode, initialData, action }) => {
         <h2 className="text-3xl font-bold tracking-tight">
           {mode === "create" ? (
             <>
-              Add New <span className="text-primary">Airdrop</span>
+              Add
+              <span className="text-primary"> Airdrop</span>
             </>
           ) : (
             <>
