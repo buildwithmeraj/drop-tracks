@@ -6,7 +6,11 @@ const Footer = () => {
       <aside>
         <p>
           Copyright © {new Date().getFullYear()} - {siteConfig.name}. Built by{" "}
-          <a href="https://meraj.pro" target="_blank">
+          <a
+            href="https://meraj.pro"
+            target="_blank"
+            className="hover:text-primary"
+          >
             Merajul Islam
           </a>
           .
