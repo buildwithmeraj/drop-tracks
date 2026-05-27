@@ -325,20 +325,40 @@ const AirdropListClient = ({ items, pagination }) => {
                 </div>
                 <div className="space-y-2">
                   <h2 className="text-2xl font-bold">
-                    No matching airdrops found
+                    {debouncedSearch
+                      ? "No matching airdrops found"
+                      : "No airdrops tracked yet"}
                   </h2>
-                  <p className="max-w-xl text-sm leading-6 text-base-content/65">
-                    Try a different keyword for &quot;{debouncedSearch}&quot; or
-                    clear the search to see all campaigns.
-                  </p>
+                  {debouncedSearch ? (
+                    <p className="max-w-xl text-sm leading-6 text-base-content/65">
+                      Try a different keyword for &quot;{debouncedSearch}
+                      &quot; or clear the search to see all campaigns.
+                    </p>
+                  ) : (
+                    <p className="max-w-xl text-sm leading-6 text-base-content/65">
+                      Add your first campaign to start tracking accounts, daily
+                      routines, payout windows, and TGE timelines from one
+                      place.
+                    </p>
+                  )}
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setSearch("")}
-                  className="btn btn-soft rounded-full"
-                >
-                  Clear search
-                </button>
+                {debouncedSearch ? (
+                  <button
+                    type="button"
+                    onClick={() => setSearch("")}
+                    className="btn btn-soft rounded-full"
+                  >
+                    Clear search
+                  </button>
+                ) : (
+                  <Link
+                    href="/dashboard/airdrops/add"
+                    className="btn btn-primary rounded-full"
+                  >
+                    <FaPlus />
+                    Add first airdrop
+                  </Link>
+                )}
               </div>
             </div>
           )}
