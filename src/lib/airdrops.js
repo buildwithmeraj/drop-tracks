@@ -51,6 +51,10 @@ function normalizeDate(value) {
   return date;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function getValue(formData, key) {
   const value = formData.get(key);
   return typeof value === "string" ? value : "";
@@ -164,16 +168,49 @@ function createUserFilter(userId) {
   return { userId: toUserIdValue(userId) };
 }
 
+function createAirdropSearchFilter(search) {
+  const query = normalizeText(search);
+
+  if (!query) {
+    return null;
+  }
+
+  const safeQuery = escapeRegExp(query);
+
+  return {
+    $or: [
+      { name: { $regex: safeQuery, $options: "i" } },
+      { link: { $regex: safeQuery, $options: "i" } },
+      { notes: { $regex: safeQuery, $options: "i" } },
+      { "accounts.label": { $regex: safeQuery, $options: "i" } },
+      { "accounts.username": { $regex: safeQuery, $options: "i" } },
+      { "accounts.email": { $regex: safeQuery, $options: "i" } },
+      { "accounts.wallet": { $regex: safeQuery, $options: "i" } },
+    ],
+  };
+}
+
 async function getCollection() {
   const db = await getDatabase();
   return db.collection(AIRDROPS_COLLECTION);
 }
 
-export async function listAirdropsByUser(userId, page = 1, pageSize = DEFAULT_PAGE_SIZE) {
+export async function listAirdropsByUser(
+  userId,
+  page = 1,
+  pageSize = DEFAULT_PAGE_SIZE,
+  search = "",
+) {
   const collection = await getCollection();
   const safePage = Math.max(1, Number(page) || 1);
   const skip = (safePage - 1) * pageSize;
-  const filter = createUserFilter(userId);
+  const searchFilter = createAirdropSearchFilter(search);
+  const filter = searchFilter
+    ? {
+        ...createUserFilter(userId),
+        ...searchFilter,
+      }
+    : createUserFilter(userId);
 
   const [items, totalItems] = await Promise.all([
     collection
@@ -193,6 +230,7 @@ export async function listAirdropsByUser(userId, page = 1, pageSize = DEFAULT_PA
       totalItems,
       totalPages: Math.max(1, Math.ceil(totalItems / pageSize)),
     },
+    search: normalizeText(search),
   };
 }
 
